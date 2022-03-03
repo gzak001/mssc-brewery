@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-
 /**
  * Created by jt on 2019-04-23.
  */
@@ -19,4 +17,5 @@ public class BeerDto {
     private String beerName;
     private BeerStyleEnum beerStyle;
     private Long upc;
-}
+
+ }

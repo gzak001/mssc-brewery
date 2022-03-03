@@ -4,7 +4,7 @@ import guru.springframework.msscbrewery.dto.CustomerDto;
 
 
 
-public class CustomerDaoImpl  implements CustomerDao {
+public class CustomerDaoImpl extends JdbcDao implements CustomerDao {
     @Override
     public CustomerDto getCustomer(Long customerId){
         CustomerDto customerDto = new CustomerDto();
