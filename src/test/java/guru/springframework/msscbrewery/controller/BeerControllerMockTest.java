@@ -42,7 +42,7 @@ public class BeerControllerMockTest {
 
     @BeforeEach
     public void setUp() {
-        validBeer = BeerDto.builder().id(getRandomLong())
+        validBeer = BeerDto.builder().id(getRandomLong().longValue())
                 .beerName("Beer1")
                 .beerStyle(BeerStyleEnum.STOUT)
                 .upc(123456789012L)
@@ -51,12 +51,12 @@ public class BeerControllerMockTest {
 
     @Test
     public void getBeer() throws Exception {
-        given(beerService.getBeerById(any(Long.class))).willReturn(validBeer);
+        given(beerService.getBeer(any())).willReturn(validBeer);
 
-        mockMvc.perform(get("/api/v1/beer/" + validBeer.getId().toString()).accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/api/v1/beer/" + validBeer.getId().longValue()).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$.id", is(validBeer.getId().toString())))
+                .andExpect(jsonPath("$.id", is(validBeer.getId().longValue())))
                 .andExpect(jsonPath("$.beerName", is("Beer1")));
     }
 
@@ -68,7 +68,7 @@ public class BeerControllerMockTest {
         BeerDto savedDto = BeerDto.builder().id(getRandomLong()).beerName("New Beer").build();
         String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 
-        given(beerService.saveNewBeer(any())).willReturn(savedDto);
+        given(beerService.saveBeer(any())).willReturn(savedDto);
 
         mockMvc.perform(post("/api/v1/beer/")
                 .contentType(MediaType.APPLICATION_JSON)

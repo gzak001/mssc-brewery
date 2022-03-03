@@ -48,14 +48,14 @@ public class BeerControllerTestV2 {
     }
     @Test
     public void validBeerNotEqualsNewBeer() throws Exception{
-        BeerDto beerDto = beerServiceV2.getBeerById(beerId);
+        BeerDto beerDto = beerServiceV2.getBeer(beerId);
         assertNotEquals(validBeer.getId(), beerDto.getId());
     }
 
 
     @Test
     public void validCustomerNotEqualsNewCustomer() throws Exception{
-        CustomerDto customerDto = customerService.getCustomerById(beerId);
+        CustomerDto customerDto = customerService.getCustomer(beerId);
         assertNotEquals(validCustomer.getId(),customerDto.getId());
     }
 

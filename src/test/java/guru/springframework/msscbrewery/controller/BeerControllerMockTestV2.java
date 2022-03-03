@@ -2,7 +2,6 @@ package guru.springframework.msscbrewery.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import guru.springframework.msscbrewery.controller.v2.BeerControllerV2;
 import guru.springframework.msscbrewery.services.CustomerService;
 import guru.springframework.msscbrewery.services.BeerServiceV2;
 import guru.springframework.msscbrewery.dto.CustomerDto;
@@ -67,12 +66,12 @@ public class BeerControllerMockTestV2 {
 
     @Test
     public void getBeer() throws Exception {
-        given(beerServiceV2.getBeerById(any(Long.class))).willReturn(validBeer);
+        given(beerServiceV2.getBeer(any(Long.class))).willReturn(validBeer);
 
-        mockMvc.perform(get("/api/v2/beer/" + validBeer.getId().toString()).accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/api/v2/beer/" + validBeer.getId().longValue()).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$.id", is(validBeer.getId().toString())))
+                .andExpect(jsonPath("$.id", is(validBeer.getId().longValue())))
                 .andExpect(jsonPath("$.beerName", is("Beer1")));
     }
 
@@ -84,7 +83,7 @@ public class BeerControllerMockTestV2 {
         BeerDto savedDto = BeerDto.builder().id(getRandomLong()).beerName("New Beer").build();
         String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 
-        given(beerServiceV2.saveNewBeer(any())).willReturn(savedDto);
+        given(beerServiceV2.saveBeer(any())).willReturn(savedDto);
 
         mockMvc.perform(post("/api/v2/beer/")
                         .contentType(MediaType.APPLICATION_JSON)

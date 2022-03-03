@@ -23,15 +23,16 @@ public class BeerRepositoryTest {
     BeerRepository beerRepository;
 
     BeerDto validBeer;
-    Long beerid= getRandomLong();
+    Long beerid= 1L;
     Long upc = 123456789012L;
 
 
     @BeforeEach
     public void setUp() {
-        validBeer = BeerDto.builder().id(beerid)
-                .beerName("Galaxy Cat")
-                .beerStyle(BeerStyleEnum.STOUT)
+        validBeer = BeerDto.builder()
+                .id(beerid)
+                .beerName("Yeugling")
+                .beerStyle(BeerStyleEnum.LAGER)
                 .upc(123456789012L)
                 .build();
     }

@@ -27,13 +27,13 @@ public class BeerController {
     @GetMapping({"/{beerId}"})
     public ResponseEntity<BeerDto> getBeer(@PathVariable("beerId") Long beerId){
 
-        return new ResponseEntity<>(beerService.getBeerById(beerId), HttpStatus.OK);
+        return new ResponseEntity<>(beerService.getBeer(beerId), HttpStatus.OK);
     }
 
     @PostMapping // POST - create new beer
     public ResponseEntity handlePost(@Valid @RequestBody BeerDto beerDto){
 
-        BeerDto savedDto = beerService.saveNewBeer(beerDto);
+        BeerDto savedDto = beerService.saveBeer(beerDto);
 
         HttpHeaders headers = new HttpHeaders();
         //todo add hostname to url

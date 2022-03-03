@@ -1,15 +1,14 @@
 package guru.springframework.msscbrewery.services;
 
+import guru.springframework.msscbrewery.domain.Beer;
 import guru.springframework.msscbrewery.dto.BeerDto;
-import guru.springframework.msscbrewery.dto.BeerStyleEnum;
 import guru.springframework.msscbrewery.repository.BeerRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-
-import static guru.springframework.msscbrewery.util.Utils.getRandomLong;
+import java.util.Optional;
 
 /**
  * Created by jt on 2019-04-20.
@@ -21,22 +20,22 @@ public class BeerServiceImpl implements BeerService {
     @Autowired
     BeerRepository beerRepository;
 
+    public Optional<Beer> getBeerById(Long beerId) {
+
+        //Optional<Beer> beer = beerRepository.findById(beerId);
+        Optional<Beer> beer = beerRepository.findById(beerId);
+        return beer;
+    }
     @Override
-    public BeerDto getBeerById(Long beerId) {
+    public BeerDto getBeer(Long beerId) {
 
+        //Optional<Beer> beer = beerRepository.findById(beerId);
         BeerDto beerDto = beerRepository.getBeer(beerId);
-        if(beerDto==null){
-            beerDto= BeerDto.builder().id(getRandomLong())
-                    .beerName("Galaxy Cat")
-                    .beerStyle(BeerStyleEnum.LAGER)
-                    .build();
-        }
-
         return beerDto;
     }
 
     @Override
-    public BeerDto saveNewBeer(BeerDto beerDto) {
+    public BeerDto saveBeer(BeerDto beerDto) {
         BeerDto beerDtoSaved = beerRepository.saveBeer(beerDto);
 
         return beerDtoSaved;

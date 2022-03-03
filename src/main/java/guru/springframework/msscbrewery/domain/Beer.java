@@ -9,15 +9,17 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Null;
 import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
 
 
+
 @Entity
 @Table(name = "BEER")
-@Data
 @Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Beer {
 
@@ -41,4 +43,6 @@ public class Beer {
     @UpdateTimestamp
     @Column(nullable = false, columnDefinition = "datetime")
     private LocalDateTime updatedDate;
+
+
 }

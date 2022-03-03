@@ -15,7 +15,7 @@ import static guru.springframework.msscbrewery.util.Utils.getRandomLong;
 @Service
 public class CustomerServiceImpl implements CustomerService {
     @Override
-    public CustomerDto getCustomerById(Long customerId) {
+    public CustomerDto getCustomer(Long customerId) {
         return CustomerDto.builder()
                 .id(getRandomLong())
                 .name("Joe Buck")
@@ -23,7 +23,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDto saveNewCustomer(CustomerDto customerDto) {
+    public CustomerDto saveCustomer(CustomerDto customerDto) {
         return CustomerDto.builder()
                 .id(getRandomLong())
                 .build();
@@ -36,7 +36,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void deleteById(Long customerId) {
+    public void deleteCustomer(Long customerId) {
         log.debug("Deleting.... ");
     }
 }

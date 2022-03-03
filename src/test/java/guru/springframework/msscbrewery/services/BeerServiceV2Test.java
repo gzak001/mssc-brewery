@@ -37,13 +37,13 @@ public class BeerServiceV2Test {
 
     @Test
         public void getBeer() throws Exception {
-        BeerDto beerDto = beerServiceV2.getBeerById(getRandomLong());
+        BeerDto beerDto = beerServiceV2.getBeer(getRandomLong());
         assertEquals(validBeerV2.getUpc(), beerDto.getUpc());
     }
 
     @Test
     public void saveNewBeer() throws Exception {
-        BeerDto beerDto = beerServiceV2.saveNewBeer(validBeerV2);
+        BeerDto beerDto = beerServiceV2.saveBeer(validBeerV2);
         assertEquals(validBeerV2.getId(), beerDto.getId());
     }
 
@@ -55,7 +55,7 @@ public class BeerServiceV2Test {
 
     @Test
     public void deleteById() throws Exception {
-        BeerDto beerDto = beerServiceV2.deleteById(validBeerV2.getId());
+        BeerDto beerDto = beerServiceV2.deleteBeer(validBeerV2.getId());
         assertEquals(validBeerV2.getId(), beerDto.getId());
     }
 

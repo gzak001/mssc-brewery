@@ -14,7 +14,7 @@ import static guru.springframework.msscbrewery.util.Utils.getRandomLong;
 @Service
 public class BeerServiceV2Impl implements BeerServiceV2 {
     @Override
-    public BeerDto getBeerById(Long beerId) {
+    public BeerDto getBeer(Long beerId) {
         return BeerDto.builder().id(getRandomLong())
                 .beerName("Galaxy Cat")
                 .beerStyle(BeerStyleEnum.STOUT)
@@ -23,7 +23,7 @@ public class BeerServiceV2Impl implements BeerServiceV2 {
     }
 
     @Override
-    public BeerDto saveNewBeer(BeerDto beerDto) {
+    public BeerDto saveBeer(BeerDto beerDto) {
 
         BeerDto beerDtoV2 =
                  BeerDto.builder().id(beerDto.getId())
@@ -45,7 +45,7 @@ public class BeerServiceV2Impl implements BeerServiceV2 {
     }
 
     @Override
-    public BeerDto deleteById(Long beerId) {
+    public BeerDto deleteBeer(Long beerId) {
         BeerDto beerDto =
                 BeerDto.builder().id(beerId)
                         .build();

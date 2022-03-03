@@ -6,12 +6,12 @@ import guru.springframework.msscbrewery.dto.CustomerDto;
 
 public class CustomerDaoImpl  implements CustomerDao {
     @Override
-    public CustomerDto getCustomerById(Long customerId){
+    public CustomerDto getCustomer(Long customerId){
         CustomerDto customerDto = new CustomerDto();
         return customerDto;
     }
     @Override
-    public CustomerDto saveNewCustomer(CustomerDto customerDto){
+    public CustomerDto saveCustomer(CustomerDto customerDto){
 
         return customerDto;
     }
@@ -22,7 +22,7 @@ public class CustomerDaoImpl  implements CustomerDao {
     }
 
     @Override
-    public void deleteById(Long customerId){
+    public void deleteCustomer(Long customerId){
 
     }
 }

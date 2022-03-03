@@ -31,4 +31,9 @@ public class MvcExceptionHandler {
     public ResponseEntity<List> handleBindException(BindException ex){
         return new ResponseEntity(ex.getAllErrors(), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(NumberFormatException.class)
+    public ResponseEntity<List> handleBindException(NumberFormatException ex){
+        return new ResponseEntity("Non Numeric: "+ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }
