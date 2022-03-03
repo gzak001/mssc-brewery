@@ -1,4 +1,4 @@
-package guru.springframework.msscbrewery.web.controller;
+package guru.springframework.msscbrewery.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

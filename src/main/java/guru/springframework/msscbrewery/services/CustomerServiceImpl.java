@@ -1,10 +1,12 @@
 package guru.springframework.msscbrewery.services;
 
-import guru.springframework.msscbrewery.web.model.CustomerDto;
+import guru.springframework.msscbrewery.dto.CustomerDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
+
+
+import static guru.springframework.msscbrewery.util.Utils.getRandomLong;
 
 /**
  * Created by jt on 2019-04-21.
@@ -13,9 +15,9 @@ import java.util.UUID;
 @Service
 public class CustomerServiceImpl implements CustomerService {
     @Override
-    public CustomerDto getCustomerById(UUID customerId) {
+    public CustomerDto getCustomerById(Long customerId) {
         return CustomerDto.builder()
-                .id(UUID.randomUUID())
+                .id(getRandomLong())
                 .name("Joe Buck")
                 .build();
     }
@@ -23,18 +25,18 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDto saveNewCustomer(CustomerDto customerDto) {
         return CustomerDto.builder()
-                .id(UUID.randomUUID())
+                .id(getRandomLong())
                 .build();
     }
 
     @Override
-    public void updateCustomer(UUID customerId, CustomerDto customerDto) {
+    public void updateCustomer(Long customerId, CustomerDto customerDto) {
         //todo impl
         log.debug("Updating....");
     }
 
     @Override
-    public void deleteById(UUID customerId) {
+    public void deleteById(Long customerId) {
         log.debug("Deleting.... ");
     }
 }

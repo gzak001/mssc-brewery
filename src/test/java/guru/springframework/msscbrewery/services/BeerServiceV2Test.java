@@ -1,17 +1,17 @@
-package guru.springframework.msscbrewery.services.v2;
+package guru.springframework.msscbrewery.services;
 
 
 import guru.springframework.msscbrewery.MsscBreweryApplication;
-import guru.springframework.msscbrewery.web.model.v2.BeerDtoV2;
-import guru.springframework.msscbrewery.web.model.v2.BeerStyleEnum;
+import guru.springframework.msscbrewery.dto.BeerDto;
+import guru.springframework.msscbrewery.dto.BeerStyleEnum;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import java.util.UUID;
 
+
+import static guru.springframework.msscbrewery.util.Utils.getRandomLong;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -21,14 +21,14 @@ public class BeerServiceV2Test {
     @Autowired(required=true)
     BeerServiceV2 beerServiceV2;
 
-    BeerDtoV2 validBeerV2;
-    UUID uuid= UUID.randomUUID();
+    BeerDto validBeerV2;
+    Long beerid= getRandomLong();
     Long upc = 123456789012L;
 
 
     @BeforeEach
     public void setUp() {
-        validBeerV2 = BeerDtoV2.builder().id(uuid)
+        validBeerV2 = BeerDto.builder().id(beerid)
                 .beerName("Galaxy Cat")
                 .beerStyle(BeerStyleEnum.STOUT)
                 .upc(123456789012L)
@@ -37,26 +37,26 @@ public class BeerServiceV2Test {
 
     @Test
         public void getBeer() throws Exception {
-        BeerDtoV2 beerDtoV2 = beerServiceV2.getBeerById(UUID.randomUUID());
-        assertEquals(validBeerV2.getUpc(), beerDtoV2.getUpc());
+        BeerDto beerDto = beerServiceV2.getBeerById(getRandomLong());
+        assertEquals(validBeerV2.getUpc(), beerDto.getUpc());
     }
 
     @Test
     public void saveNewBeer() throws Exception {
-        BeerDtoV2 beerDtoV2 = beerServiceV2.saveNewBeer(validBeerV2);
-        assertEquals(validBeerV2.getId(), beerDtoV2.getId());
+        BeerDto beerDto = beerServiceV2.saveNewBeer(validBeerV2);
+        assertEquals(validBeerV2.getId(), beerDto.getId());
     }
 
     @Test
     public void updateBeer() throws Exception {
-        BeerDtoV2 beerDtoV2 = beerServiceV2.updateBeer(validBeerV2);
-        assertEquals(validBeerV2.getId(), beerDtoV2.getId());
+        BeerDto beerDto = beerServiceV2.updateBeer(validBeerV2);
+        assertEquals(validBeerV2.getId(), beerDto.getId());
     }
 
     @Test
     public void deleteById() throws Exception {
-        BeerDtoV2 beerDtoV2 = beerServiceV2.deleteById(validBeerV2.getId());
-        assertEquals(validBeerV2.getId(), beerDtoV2.getId());
+        BeerDto beerDto = beerServiceV2.deleteById(validBeerV2.getId());
+        assertEquals(validBeerV2.getId(), beerDto.getId());
     }
 
 }

@@ -1,4 +1,4 @@
-package guru.springframework.msscbrewery.web.model.v2;
+package guru.springframework.msscbrewery.dto;
 
 /**
  * Created by jt on 2019-04-23.

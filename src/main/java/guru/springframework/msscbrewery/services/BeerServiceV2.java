@@ -5,14 +5,14 @@ import guru.springframework.msscbrewery.dto.BeerDto;
 
 
 /**
- * Created by jt on 2019-04-20.
+ * Created by jt on 2019-04-23.
  */
-public interface BeerService {
+public interface BeerServiceV2 {
     BeerDto getBeerById(Long beerId);
 
     BeerDto saveNewBeer(BeerDto beerDto);
 
-    void updateBeer(Long beerId, BeerDto beerDto);
+    BeerDto updateBeer(BeerDto beerDto);
 
-    void deleteById(Long beerId);
+    BeerDto deleteById(Long beerId);
 }

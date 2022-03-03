@@ -1,7 +1,7 @@
-package guru.springframework.msscbrewery.web.controller.v2;
+package guru.springframework.msscbrewery.controller.v2;
 
-import guru.springframework.msscbrewery.services.v2.BeerServiceV2;
-import guru.springframework.msscbrewery.web.model.v2.BeerDtoV2;
+import guru.springframework.msscbrewery.services.BeerServiceV2;
+import guru.springframework.msscbrewery.dto.BeerDto;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.http.HttpHeaders;
@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.UUID;
+
 
 /**
  * Created by jt on 2019-04-23.
@@ -29,13 +29,13 @@ public class BeerControllerV2 {
     }
 
     @GetMapping({"/{beerId}"})
-    public ResponseEntity<BeerDtoV2> getBeer(@PathVariable("beerId") UUID beerId){
+    public ResponseEntity<BeerDto> getBeer(@PathVariable("beerId") Long beerId){
 
         return new ResponseEntity<>(beerServiceV2.getBeerById(beerId), HttpStatus.OK);
     }
 
     @PostMapping // POST - create new beer
-    public ResponseEntity handlePost(@Valid @RequestBody BeerDtoV2 beerDto){
+    public ResponseEntity handlePost(@Valid @RequestBody BeerDto beerDto){
 
         log.debug("in handle post...");
 
@@ -49,7 +49,7 @@ public class BeerControllerV2 {
     }
 
     @PutMapping({"/{beerId}"})
-    public ResponseEntity handleUpdate(@PathVariable("beerId") UUID beerId, @Valid @RequestBody BeerDtoV2 beerDto){
+    public ResponseEntity handleUpdate(@PathVariable("beerId") Long beerId, @Valid @RequestBody BeerDto beerDto){
 
         beerServiceV2.updateBeer(beerDto);
 
@@ -58,7 +58,7 @@ public class BeerControllerV2 {
 
     @DeleteMapping({"/{beerId}"})
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteBeer(@PathVariable("beerId") UUID beerId){
+    public void deleteBeer(@PathVariable("beerId") Long beerId){
         beerServiceV2.deleteById(beerId);
     }
 

@@ -1,10 +1,15 @@
 package guru.springframework.msscbrewery.services;
 
-import guru.springframework.msscbrewery.web.model.BeerDto;
+import guru.springframework.msscbrewery.dto.BeerDto;
+import guru.springframework.msscbrewery.dto.BeerStyleEnum;
+import guru.springframework.msscbrewery.repository.BeerRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
+
+
+import static guru.springframework.msscbrewery.util.Utils.getRandomLong;
 
 /**
  * Created by jt on 2019-04-20.
@@ -12,28 +17,39 @@ import java.util.UUID;
 @Slf4j
 @Service
 public class BeerServiceImpl implements BeerService {
+
+    @Autowired
+    BeerRepository beerRepository;
+
     @Override
-    public BeerDto getBeerById(UUID beerId) {
-        return BeerDto.builder().id(UUID.randomUUID())
-                .beerName("Galaxy Cat")
-                .beerStyle("Pale Ale")
-                .build();
+    public BeerDto getBeerById(Long beerId) {
+
+        BeerDto beerDto = beerRepository.getBeer(beerId);
+        if(beerDto==null){
+            beerDto= BeerDto.builder().id(getRandomLong())
+                    .beerName("Galaxy Cat")
+                    .beerStyle(BeerStyleEnum.LAGER)
+                    .build();
+        }
+
+        return beerDto;
     }
 
     @Override
     public BeerDto saveNewBeer(BeerDto beerDto) {
-        return BeerDto.builder()
-                .id(UUID.randomUUID())
-                .build();
+        BeerDto beerDtoSaved = beerRepository.saveBeer(beerDto);
+
+        return beerDtoSaved;
+
     }
 
     @Override
-    public void updateBeer(UUID beerId, BeerDto beerDto) {
-        //todo impl - would add a real impl to update beer
+    public void updateBeer(Long beerId, BeerDto beerDto) {
+        beerRepository.updateBeer(beerDto);
     }
 
     @Override
-    public void deleteById(UUID beerId) {
-        log.debug("Deleting a beer...");
+    public void deleteById(Long beerId) {
+        beerRepository.deleteBeer(beerId);
     }
 }

@@ -1,14 +1,14 @@
-package guru.springframework.msscbrewery.web.controller;
+package guru.springframework.msscbrewery.controller;
 
 import guru.springframework.msscbrewery.services.CustomerService;
-import guru.springframework.msscbrewery.web.model.CustomerDto;
+import guru.springframework.msscbrewery.dto.CustomerDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
+
 
 /**
  * Created by jt on 2019-04-21.
@@ -25,7 +25,7 @@ public class CustomerController {
     }
 
     @GetMapping("/{customerId}")
-    public ResponseEntity<CustomerDto> getCustomer(@PathVariable("customerId")  UUID customerId){
+    public ResponseEntity<CustomerDto> getCustomer(@PathVariable("customerId")  Long customerId){
 
         return new ResponseEntity<>(customerService.getCustomerById(customerId), HttpStatus.OK);
     }
@@ -42,12 +42,12 @@ public class CustomerController {
 
     @PutMapping("/{customerId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void handleUpdate(@PathVariable("customerId") UUID customerId, @Validated @RequestBody CustomerDto customerDto){
+    public void handleUpdate(@PathVariable("customerId") Long customerId, @Validated @RequestBody CustomerDto customerDto){
         customerService.updateCustomer(customerId, customerDto);
     }
 
     @DeleteMapping("/{customerId}")
-    public void deleteById(@PathVariable("customerId")  UUID customerId){
+    public void deleteById(@PathVariable("customerId")  Long customerId){
         customerService.deleteById(customerId);
     }
 
