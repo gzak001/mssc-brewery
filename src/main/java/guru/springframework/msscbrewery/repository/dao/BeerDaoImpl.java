@@ -53,6 +53,10 @@ public class BeerDaoImpl extends JdbcDao implements BeerDao {
         try {
             int updCnt= getJdbcTemplate.update(queryString, beerDto.getId() ,beerDto.getBeerName(), beerDto.getBeerStyle().name(),beerDto.getUpc(),currentDateTime,currentDateTime);
             System.out.println("inserting ID "+beerDto.getId()+", inserted count: "+updCnt);
+            if(updCnt!=1)
+                beerDto.setId(null);
+
+
         }
         catch(Exception e){
 

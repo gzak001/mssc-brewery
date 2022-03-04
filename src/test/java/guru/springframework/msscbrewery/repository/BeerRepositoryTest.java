@@ -8,13 +8,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.annotation.Order;
 
 import static guru.springframework.msscbrewery.util.Utils.getRandomLong;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /*
 https://www.bezkoder.com/spring-boot-unit-test-jpa-repo-datajpatest/
  */
+
 
 @SpringBootTest(classes = MsscBreweryApplication.class)
 public class BeerRepositoryTest {
@@ -22,15 +24,16 @@ public class BeerRepositoryTest {
     @Autowired(required=true)
     BeerRepository beerRepository;
 
-    BeerDto validBeer;
-    Long beerid= 1L;
-    Long upc = 123456789012L;
+    Long beerId=getRandomLong();
 
+
+    BeerDto expectedBeer = null;
+    BeerDto actualBeer=null;
 
     @BeforeEach
     public void setUp() {
-        validBeer = BeerDto.builder()
-                .id(beerid)
+        expectedBeer = BeerDto.builder()
+                .id(beerId)
                 .beerName("Yeugling")
                 .beerStyle(BeerStyleEnum.LAGER)
                 .upc(123456789012L)
@@ -40,27 +43,31 @@ public class BeerRepositoryTest {
 
     @Test
     public void saveBeer() throws Exception {
-        BeerDto beerDto = beerRepository.saveBeer(validBeer);
-        assertEquals(validBeer.getId(), beerDto.getId());
+        BeerDto actualBeer = beerRepository.saveBeer(expectedBeer);
+        assertEquals(expectedBeer.getId(), actualBeer.getId());
     }
     @Test
-    public void getBeer() throws Exception {
-        BeerDto beerDto = beerRepository.getBeer(beerid);
-        assertEquals(validBeer.getUpc(), beerDto.getUpc());
-    }
-
-
-
-    @Test
-    public void updateBeer() throws Exception {
-        beerRepository.updateBeer(validBeer);
-        assertEquals(validBeer.getId(), validBeer.getId());
+     public void getBeer() throws Exception {
+        beerRepository.saveBeer(expectedBeer);
+        actualBeer = beerRepository.getBeer(expectedBeer.getId());
+        assertEquals(expectedBeer.getId(), actualBeer.getId());
     }
 
     @Test
-    public void deleteBeer() throws Exception {
-        beerRepository.deleteBeer(validBeer.getId());
-        assertEquals(validBeer.getId(), validBeer.getId());
+       public void updateBeer() throws Exception {
+        beerRepository.saveBeer(expectedBeer);
+        expectedBeer.setUpc(2222222222222L);
+        beerRepository.updateBeer(expectedBeer);
+        BeerDto actualBeer = beerRepository.getBeer(expectedBeer.getId());
+        assertEquals(expectedBeer.getUpc(), actualBeer.getUpc());
+    }
+
+    @Test
+        public void deleteBeer() throws Exception {
+        beerRepository.saveBeer(expectedBeer);
+        beerRepository.deleteBeer(expectedBeer.getId());
+        actualBeer = beerRepository.getBeer(expectedBeer.getId());
+        assertNull(actualBeer);
     }
 
 }
