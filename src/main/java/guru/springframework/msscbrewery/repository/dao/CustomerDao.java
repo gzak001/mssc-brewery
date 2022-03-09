@@ -1,13 +1,11 @@
-package guru.springframework.msscbrewery.services;
+package guru.springframework.msscbrewery.repository.dao;
 
 import guru.springframework.msscbrewery.dto.CustomerDto;
 
 
 
-/**
- * Created by jt on 2019-04-21.
- */
-public interface CustomerService {
+public interface CustomerDao {
+
     CustomerDto getCustomer(Long customerId);
 
     CustomerDto saveCustomer(CustomerDto customerDto);

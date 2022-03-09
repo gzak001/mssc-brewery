@@ -1,40 +1,31 @@
 package guru.springframework.msscbrewery.domain;
 
-
-
-
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 
-
 @Entity
-@Table(name = "BEER")
-@Builder
+@Table(name = "CUSTOMER")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Beer {
+public class Customer {
 
     @Id
     @GeneratedValue
     private Long id;
 
     @NotBlank
-    private String beerName;
-
-    @NotBlank
-    private String beerStyle;
-
-    @Positive
-    private Long upc;
+    @Size(min = 3, max = 100)
+    private String name;
 
     @CreationTimestamp
     @Column(nullable = false, columnDefinition = "datetime", updatable = false)
@@ -43,6 +34,4 @@ public class Beer {
     @UpdateTimestamp
     @Column(nullable = false, columnDefinition = "datetime")
     private LocalDateTime updatedDate;
-
-
 }

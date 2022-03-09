@@ -1,4 +1,4 @@
-package guru.springframework.msscbrewery.web.controller;
+package guru.springframework.msscbrewery.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,5 +30,10 @@ public class MvcExceptionHandler {
     @ExceptionHandler(BindException.class)
     public ResponseEntity<List> handleBindException(BindException ex){
         return new ResponseEntity(ex.getAllErrors(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NumberFormatException.class)
+    public ResponseEntity<List> handleBindException(NumberFormatException ex){
+        return new ResponseEntity("Non Numeric: "+ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }
