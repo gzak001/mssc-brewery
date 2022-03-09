@@ -29,7 +29,7 @@ public class Beer {
 
     @NotBlank
     private String beerName;
-    // Added a comment
+
 
     @NotBlank
     private String beerStyle;
